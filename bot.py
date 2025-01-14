@@ -2,7 +2,6 @@ import discord
 import json
 import requests
 from discord.ext import commands, tasks
-
 from dotenv import load_dotenv
 import os
 
@@ -13,9 +12,8 @@ load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 SERP_API_KEY = os.getenv("SERP_API_KEY")
 
-
 # Configurações
-CANAL_ID = 1328473388783632507 # Substitua pelo ID do canal
+CANAL_ID = 1328473388783632507  # Substitua pelo ID do canal
 
 # Intents para o bot
 intents = discord.Intents.default()
@@ -40,15 +38,13 @@ def salvar_noticias():
 # Histórico de notícias enviadas
 noticias_enviadas = carregar_noticias()
 
-# Configuração do bot
-intents = discord.Intents.default()
-bot = commands.Bot(command_prefix="/", intents=intents)
-
+# Comando /j para buscar notícias específicas
 @bot.command(name="j")
 async def buscar_noticias(ctx, *, termo: str):
     """Comando para buscar notícias específicas com base no termo fornecido."""
     await ctx.send(f"🔍 Buscando notícias sobre: **{termo}**...")
-    
+
+    # Fazendo a requisição para a API do SerpApi com a palavra-chave fornecida
     url = f"https://serpapi.com/search.json?q={termo}&tbm=nws&tbs=qdr:d&api_key={SERP_API_KEY}"
     response = requests.get(url)
     
@@ -58,19 +54,20 @@ async def buscar_noticias(ctx, *, termo: str):
     if response.status_code == 200:
         resultados = response.json().get("news_results", [])
         if resultados:
-            for noticia in resultados[:5]:  # Limite de 5 notícias
-                titulo = noticia.get("title")
-                link = noticia.get("link")
-                if link not in noticias_enviadas:
-                    noticias_enviadas.add(link)
-                    salvar_noticias()
-                    await ctx.send(f"**{titulo}**\n[Leia mais]({link})")
+            # Enviar a primeira notícia encontrada
+            noticia = resultados[0]  # A primeira notícia
+            titulo = noticia.get("title")
+            link = noticia.get("link")
+            if link not in noticias_enviadas:
+                noticias_enviadas.add(link)
+                salvar_noticias()
+                await ctx.send(f"**{titulo}**\n[Leia mais]({link})")
         else:
             await ctx.send("⚠️ Nenhuma notícia encontrada para o termo especificado.")
     else:
         await ctx.send(f"❌ Erro ao buscar notícias: {response.status_code}")
 
-
+# Função que é chamada quando o bot estiver pronto
 @bot.event
 async def on_ready():
     print(f"Bot conectado como {bot.user}")
