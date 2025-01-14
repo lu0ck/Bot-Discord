@@ -13,7 +13,7 @@ TOKEN = os.getenv("DISCORD_TOKEN")
 SERP_API_KEY = os.getenv("SERP_API_KEY")
 
 # Configurações
-CANAL_ID = 1328473388783632507  # Substitua pelo ID do canal
+CANAL_ID = os.getenv("ID_CANAL")  # Substitua pelo ID do canal
 
 # Intents para o bot
 intents = discord.Intents.default()
