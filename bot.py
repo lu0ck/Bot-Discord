@@ -44,28 +44,30 @@ async def buscar_noticias(ctx, *, termo: str):
     """Comando para buscar notícias específicas com base no termo fornecido."""
     await ctx.send(f"🔍 Buscando notícias sobre: **{termo}**...")
 
-    # Fazendo a requisição para a API do SerpApi com a palavra-chave fornecida
     url = f"https://serpapi.com/search.json?q={termo}&tbm=nws&tbs=qdr:d&api_key={SERP_API_KEY}"
     response = requests.get(url)
     
-    # Log da resposta para depuração
-    print(f"Resposta da API: {response.text}")  # Verifique o conteúdo completo da resposta
+    print(f"Resposta da API: {response.text}")
 
     if response.status_code == 200:
         resultados = response.json().get("news_results", [])
         if resultados:
-            # Enviar a primeira notícia encontrada
             noticia = resultados[0]  # A primeira notícia
             titulo = noticia.get("title")
             link = noticia.get("link")
             if link not in noticias_enviadas:
                 noticias_enviadas.add(link)
                 salvar_noticias()
-                await ctx.send(f"**{titulo}**\n[Leia mais]({link})")
+                try:
+                    await ctx.send(f"**{titulo}**\n[Leia mais]({link})")
+                except discord.errors.DiscordServerError as e:
+                    await ctx.send("❌ Erro ao enviar a mensagem. Tente novamente mais tarde.")
+                    print(f"Erro no envio da mensagem: {e}")
         else:
             await ctx.send("⚠️ Nenhuma notícia encontrada para o termo especificado.")
     else:
         await ctx.send(f"❌ Erro ao buscar notícias: {response.status_code}")
+
 
 # Função que é chamada quando o bot estiver pronto
 @bot.event
@@ -73,7 +75,7 @@ async def on_ready():
     print(f"Bot conectado como {bot.user}")
     verificar_noticias.start()
 
-@tasks.loop(minutes=10)
+@tasks.loop(minutes=120)
 async def verificar_noticias():
     """Busca por notícias das últimas 24 horas relacionadas às cidades e envia ao canal."""
     canal = bot.get_channel(CANAL_ID)
