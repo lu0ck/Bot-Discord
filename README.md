@@ -1,7 +1,6 @@
 
 ## **Bot Discord "Jornal Geral" - Projeto de Automação e Informações em Tempo Real**
 
-### **Descrição Geral**
 Este projeto consiste na criação de um bot para o Discord, desenvolvido para buscar e compartilhar notícias em tempo real, além de responder a comandos personalizados. Ele foi projetado com foco em automação, integração com APIs e boas práticas de desenvolvimento colaborativo.  
 
 ### **Funcionalidades Principais**
