@@ -11,7 +11,7 @@ Este projeto consiste na criação de um bot para o Discord, desenvolvido para b
    - Armazenamento local das notícias enviadas em um arquivo JSON.  
 
 2. **Verificação Automática de Notícias**  
-   - A cada 10 minutos, o bot busca automaticamente por notícias relacionadas a termos predefinidos.  
+   - A cada 120 minutos, o bot busca automaticamente por notícias relacionadas a termos predefinidos.  
    - Notícias relevantes são enviadas diretamente em um canal específico do Discord.  
 
 3. **Gerenciamento de Dados Persistentes**  
