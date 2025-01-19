@@ -1,4 +1,72 @@
 
+# In English:
+
+## **Discord Bot "Jornal Geral" - Real-Time News and Automation Project**
+
+This project involves the creation of a Discord bot designed to fetch and share news in real-time, as well as respond to custom commands. It was designed with a focus on automation, API integration, and best practices for collaborative development.
+
+### **Main Features**
+1.  **Custom News Search (`/j`)**
+    -   The bot allows searching for news based on terms provided by the user.
+    -   Integration with the SerpAPI to fetch the latest news results.
+    -   Filtering of already sent news to avoid duplicates.
+    -   Local storage of sent news in a JSON file.
+
+2.  **Automatic News Checking**
+    -   Every 120 minutes, the bot automatically searches for news related to predefined terms.
+    -   Relevant news is sent directly to a specific Discord channel.
+
+3.  **Persistent Data Management**
+    -   Local storage using JSON to save and retrieve links of sent news.
+
+4.  **Use of Secure Settings**
+    -   Sensitive variables, such as the bot token and API key, are managed using a `.env` file, ensuring security and avoiding exposure in the code.
+
+### **Technologies Used**
+-   **Python**: Main language of the project.
+-   **Python Libraries**:
+    -   `discord.py`: For interactions with Discord.
+    -   `requests`: For HTTP calls to the news API.
+    -   `dotenv`: For loading environment variables.
+-   **Git and GitHub**: For code versioning and collaboration.
+-   **Railway**: For hosting and continuous execution of the bot in the cloud.
+-   **JSON**: For local management of persistent data.
+
+### **Development Workflow**
+1.  **Environment Setup**
+    -   Configured a virtual environment in Python to manage dependencies.
+    -   Created a `requirements.txt` file to facilitate the installation of libraries.
+
+2.  **Integration with the SerpAPI**
+    -   Configured API calls to fetch news based on keywords.
+    -   Implemented filters to avoid content duplication.
+
+3.  **Security and Best Practices**
+    -   Sensitive variables were stored in a `.env` file and ignored by Git using `.gitignore`.
+    -   Resolved merge conflicts in the remote repository after direct editing on GitHub.
+
+4.  **Hosting on Railway**
+    -   Configured a production environment on Railway.
+    -   Added a custom startup command to run the bot automatically.
+
+5.  **Bug Fixes and Testing**
+    -   Debugged and fixed errors related to API configuration and bot behavior.
+    -   Tested the commands on Discord to ensure that all functionalities were working correctly.
+
+### **Learnings and Impact**
+-   **Technical Learning**:
+    -   Configuration of virtual environments and dependency management.
+    -   API handling and integration with external systems.
+    -   Project management with Git and conflict resolution.
+
+-   **Project Impact**:
+    -   The bot provided an automated way to access relevant news, facilitating real-time access to information for users of a Discord server.
+
+---
+
+
+# Em Português:
+
 ## **Bot Discord "Jornal Geral" - Projeto de Automação e Informações em Tempo Real**
 
 Este projeto consiste na criação de um bot para o Discord, desenvolvido para buscar e compartilhar notícias em tempo real, além de responder a comandos personalizados. Ele foi projetado com foco em automação, integração com APIs e boas práticas de desenvolvimento colaborativo.  
