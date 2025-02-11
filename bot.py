@@ -75,7 +75,7 @@ async def on_ready():
     print(f"Bot conectado como {bot.user}")
     verificar_noticias.start()
 
-@tasks.loop(minutes=120)
+@tasks.loop(minutes=720)
 async def verificar_noticias():
     """Busca por notícias das últimas 24 horas relacionadas às cidades e envia ao canal."""
     canal = bot.get_channel(CANAL_ID)
