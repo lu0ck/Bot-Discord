@@ -9,7 +9,7 @@ import os
 load_dotenv()
 
 # Configurações
-TOKEN = os.getenv("DISCORD_TOKEN")
+TOKEN = os.getenv("TOKEN")
 SERP_API_KEY = os.getenv("SERP_API_KEY")
 
 # Configurações
